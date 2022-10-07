@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="productDetail-main">
+       | 
+        <section class="product-detail-info">
+            <div class="product-detail-image">
+                <figure>
+                    <img src="/images/<%= product.image[0] %>" width=250px alt="<%= product.name %>">
+                </figure>
+            </div>
+
+            <div class="product-detail-detail">
+                <h4 class="name"><%= product.name %></h4>
+                <p class="price">$<%= product.price %></p>
+                <p class="description"><%= product.description %></p> 
+            </div>     
+        </section>
+
+        <div class="form-buttons">
+                <button type="submit" class="submit-button">Agregar al Carrito</button>
+                <button type="submit" class="submit-button">Volver al Listado</button>
+                <% if (locals.isLogged && locals.userLogged.admin == true) {%>
+                <a href="/products/edit/<%= product.id %>"><button type="submit" class="submit-button">Editar Producto</button></a>
+                <form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="submit-button">Eliminar Producto</button>
+                </form>
+                <% } %> 
+        </div>   
+        
+    </main>   
+    
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %> 
+    
+</body>
+</html>

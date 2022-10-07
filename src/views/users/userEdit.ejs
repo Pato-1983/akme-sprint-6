@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="main-productEdit">
+        
+        <h3 class="register-title">Edición de usuario</h3>        
+    
+        <form class="productEdit-form" action="/users/edit/<%= users.id %>?_method=PUT"  method="POST" enctype="multipart/form-data">       
+
+            <div class="form-div">
+                <label for="firstName" class="form-label">Nombre</label>
+                <input type="text" name="firstName" id="firstName" value= "<%= users.firstName %>" required>
+            </div>   
+            
+            <div class="form-div">
+                <label for="lastName" class="form-label">Apellido</label>
+                <input type="text" name="lastName" id="lastName" value= "<%= users.lastName %>" required>
+            </div>               
+        
+            <div class="form-div">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" name="email" id="email" value= "<%= users.email %>" required>
+            </div>
+            
+            <div class="form-div">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="text" name="password" id="password" value= "<%= users.password %>" required>
+            </div>
+
+            <div class="form-div">
+                <label for="celular" class="form-label">Celular</label>
+                <input type="text" name="celular" id="celular" value= "<%= users.celular %>" required>
+            </div>
+
+            <div class="form-div">
+                <label>Seleccionar imagen</label>
+                <input type="file" name="image" accept="jpg, png">
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="submit-button">Guardar cambios</button>
+            </div>
+    
+        </form>
+    
+    </main>
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %> 
+    
+</body>
+</html>

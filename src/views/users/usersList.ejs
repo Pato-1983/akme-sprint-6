@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="main-home">
+        <section class="categorias-principales">
+            <!-- <h3>Categorias principales</h3> -->
+            <div class="listado">
+                <p class="titulo">USUARIOS</p>
+            </div>
+            <div class="users">
+                <% users.forEach(users => { %>                    
+                    <article class="profiles">
+                            <figure class="profilepic">
+                                <img src="/images/<%= users.image %>" class="product_img"
+                                    alt="">
+                            </figure>                            
+                            <div class="main-article">
+                                <div class="price_cart">
+                                    <p class="price"><%= users.firstName %> <%= users.lastName %></p>
+                                </div>
+                                <a href="/users/detail/<%= users.id %>"><button type="submit" class="submit-button">VER DETALLES</button></a>
+                            </div>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main> 
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %>     
+    
+</body>
+</html>

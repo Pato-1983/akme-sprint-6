@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+    
+    <main class="main-login">
+        <h3 class="login-title">INICIAR SESIÓN</h3>
+    
+        <form class="login-form" action="/users/login" method="POST">
+    
+            <div class="form-div">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" required>
+                <% if (locals.errors && errors.email) {%>
+                    <p class = "errorMessage"> <%= errors.email.msg %> </p>
+                    <% } %>   
+            </div>
+    
+            <div class="form-div">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+
+            <div class="rememberMe">
+                <input class = "check" type="checkbox" name="rememberMe">
+                <label>Recordar mi usuario</label>
+            </div>
+    
+            <div class="form-buttons">
+                <button type="submit" class="submit-button">INGRESAR</button>
+            </div>
+    
+        </form>
+    
+        <h2>Recuperar contraseña</h2>
+        <h2>No posee cuenta? <a href="/users/register"> REGISTRARSE</a></h2>
+    </main>
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %>     
+    
+</body>
+</html>

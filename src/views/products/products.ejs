@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="main-home">
+        <section class="categorias-principales">
+            <!-- <h3>Categorias principales</h3> -->
+            <div class="listado">
+                <p class="titulo">PRODUCTOS</p>
+            </div>
+            <div class="products">
+                <% productos.forEach(products => { %>                    
+                    <article class="ofertas">
+                        <a href="/products/detail/<%= products.id %> ">
+                            <figure>
+                                <img src="/images/<%= products.Images.name %>" class="product_img"
+                                    alt="<%= products.name %>">
+                            </figure>
+                            <div class="main-article">
+                                <h4 class="description"><%= products.name %></h4>
+                                <div class="price_cart">
+                                    <p class="price">$<%= toThousand(products.price) %></p>
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <% }) %>
+            </div>
+        </section>
+    </main> 
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %>     
+    
+</body>
+</html>

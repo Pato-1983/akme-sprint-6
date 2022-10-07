@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="productDetail-main">
+        <section class="product-detail-info">
+            <div class="product-detail-image">
+                <figure>
+                    <img src="/images/<%= user.image %>" width=250px alt="<%= user.firstName%> <%= user.lastName %>">
+                </figure>
+            </div>
+
+            <div class="product-detail-detail">
+                <p class="price">Hola <%= user.firstName %> <%= user.lastName %>!</p>
+                <p class="price"> <%= user.email %></p>
+            </div>     
+        </section>
+
+        <a href="/users/logout"><button type="submit" class="submit-button">  CERRAR SESION  </button></a>
+        
+    </main>   
+    
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %> 
+    
+</body>
+</html>

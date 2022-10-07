@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="main-home">
+    <div class="slider">
+        <div class="swiffy-slider">
+            <ul class="slider-container">
+                <li><img src="/images/1.png" style="max-width: 90%;height: auto;"></li>
+                <li><img src="/images/2.png" style="max-width: 90%;height: auto;"></li>
+                <li><img src="/images/3.png" style="max-width: 90%;height: auto;"></li>
+                <li><img src="/images/4.png" style="max-width: 90%;height: auto;"></li>
+                <li><img src="/images/5.png" style="max-width: 90%;height: auto;"></li>
+            </ul>
+        
+            <button type="button" class="slider-nav"></button>
+            <button type="button" class="slider-nav slider-nav-next"></button>
+        
+            <div class="slider-indicators">
+                <button class="active"></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+        </div>
+    </div>
+        <section class="categorias-principales">
+            <!-- <h3>Categorias principales</h3> -->
+            <div class="products">
+                <div class="listado">
+                    <p class="titulo">OFERTAS</p>
+                </div>
+                <% ofertas.forEach(products => { %>                    
+                    <article class="ofertas">
+                        <a href="/products/detail/<%= products.id %> ">
+                            <figure>
+                                <img src="/images/<%= products.image[0] %>" class="product_img"
+                                    alt="<%= products.name %>">
+                            </figure>
+                            <div class="main-article">
+                                <h4 class="description"><%= products.name %></h4>
+                                <div class="price_cart">
+                                    <p class="price">$<%= toThousand(products.price) %></p>
+                                    <i class="fas fa-cart-arrow-down"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <% }) %>
+
+            </div>
+        </section>
+    </main> 
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %>     
+    
+</body>
+</html>

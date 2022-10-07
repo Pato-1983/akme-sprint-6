@@ -1,0 +1,41 @@
+[
+ {
+  "id": 5,
+  "firstName": "Rodrigo",
+  "lastName": "Fuenzalida",
+  "email": "rodrigofuenzalida@gmail.com",
+  "password": "$2a$10$pIE4z1MWZcnVzPmUDiGcV.mROoB9o8kHa77Xtg11/9qH/xPoaZvg2",
+  "celular": "5493874409463",
+  "image": [
+   "user-img-1662997865601.PNG"
+  ]
+ },
+ {
+  "firstName": "Bruno",
+  "lastName": "Grieco",
+  "email": "brunogrieco@gmail.com",
+  "password": "$2a$10$OxW0ttJbKeLZtucsuyScr.NisM7/fa0Zu0uMzhnvpxkUgDg8M6LFW",
+  "celular": "5491122549107",
+  "image": "user-img-1662989268632.PNG",
+  "id": 6
+ },
+ {
+  "firstName": "Lucas",
+  "lastName": "Rivas",
+  "email": "lucasrivas@gmail.com",
+  "password": "$2a$10$Exg.AL25xbwDeGZr0lzVO.PnTbOtI8xvMPVvpH1.CPP9jSljC8Uau",
+  "celular": "5493543692845",
+  "image": "user-img-1662989437455.PNG",
+  "id": 7
+ },
+ {
+  "firstName": "Patricio",
+  "lastName": "Constantino",
+  "email": "patricioconstantino@hotmail.com",
+  "password": "$2a$10$iy.R.3gWkgt7V22ve4iLFu89MkDP0GVxVglZcHom7nGRwyX3Ib2SS",
+  "admin": true,
+  "celular": "5491133998875",
+  "image": "user-img-1663023466074.PNG",
+  "id": 8
+ }
+]

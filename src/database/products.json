@@ -1,0 +1,110 @@
+[
+ {
+  "id": "1",
+  "name": "Protector Auditivo2",
+  "description": "Los protectores auditivos  Akme están diseñados para entornos muy ruidosos y atenúan al máximo, incluso a frecuencias muy bajas. Los anillos aislantes tienen un relleno combinado de líquido y espuma. El resultado es un aislamiento óptimo y una presión de contacto baja, con un agradable confort incluso en uso prolongado. Los anillos aislantes tienen canales de ventilación y están revestidos con una lámina suave. Los protectores Akme son adecuados para entornos con ruido industrial muy fuerte o para trabajar con maquinaria de construcción, en aeropuertos y en la agricultura.",
+  "price": "20000",
+  "category": "Detectores de gases",
+  "color": "naranja y negro",
+  "discount": "25",
+  "image": [
+   "img-auditivo.jpg"
+  ]
+ },
+ {
+  "id": "2",
+  "name": "Tubos detectores PH3-50",
+  "description": "Los Tubos Detectores se usan para la determinación de fosfina (PH3) en aire. Los mismos permiten un rápido, práctico y económico sistema de control de seguridad y/o eficiencia en los tratamientos de fumigación con fosfina (PH3).",
+  "price": "200",
+  "category": "Detectores de gases",
+  "color": "Transparente",
+  "discount": "10",
+  "image": [
+   "img-detector-tubes-ph350.jpg"
+  ]
+ },
+ {
+  "id": "3",
+  "name": "Filtros 201-B2",
+  "description": "Filtro antigás a rosca unificada EN 148-1 para gas y vapores inorgánicos, halógenos y ácidos halogenados. El filtro puede ser utilizado con máscaras y semimáscaras dotadas de rosca EN 148-1.s..",
+  "price": "900",
+  "category": "Detectores de gases",
+  "color": "Azul",
+  "discount": "0",
+  "image": [
+   "img-filtro-201b2.jpg"
+  ]
+ },
+ {
+  "id": "4",
+  "name": "Guantes Acrilonitrilo",
+  "description": "Guante Bil Vex 39 cm ofrece un modelo de Acrilo-Nitrilo sin soporte textil Interior liso. Exterior antideslizante. Interior flocado, pesado. Desteridad: 5. Color: Verde. Modelo: 39 cm. Talle disponible: M(8) / L(9) / XL(10). Según Norma Europa CE. Cumple con Resolución 896, Sello S IRAM.",
+  "price": "400",
+  "image": [
+   "img-guantes-acrilonitrilo.jpg"
+  ],
+  "discount": "10",
+  "category": "EPP indumentaria",
+  "color": "Verde"
+ },
+ {
+  "id": "5",
+  "name": "Máscara FullFace",
+  "description": "Protege de vapores, sustancias nocivas y gases. Práctica y eficaz. Ideal para todo tipo de industria y trabajos en contacto con sustancias contaminantes o tóxicas. Liviana y de fácil colocación. Liviana y de fácil colocación.",
+  "price": "2000",
+  "category": "Protectores respiratorios",
+  "color": "Azul",
+  "discount": "10",
+  "image": [
+   "img-mascara-fullface.jpg"
+  ]
+ },
+ {
+  "id": "6",
+  "name": "Semi-máscara Kit DUO",
+  "description": "Semimáscara compuesta por un Elastómero termoplástico atoxico (TPE), libre de FTALATOS, lo que permite un óptimo uso en las distintas circunstancias climáticas ya que el material a bajas o altas temperaturas conserva sus características sin permitir que el respirador se endurezca o se ablande. Ofrece uno de los más confortables adaptadores faciales disponibles actualmente, con excelente factor de calce y suave sellado. Fácil higienización y desinfección.",
+  "price": "1500",
+  "category": "Protectores respiratorios",
+  "color": "Azul",
+  "discount": "0",
+  "image": [
+   "img-mascara-semimascara.jpg"
+  ]
+ },
+ {
+  "id": "7",
+  "name": "Mameluco Tyvek",
+  "description": "Mameluco: Se trata de un material único y versátil, resistente y con una textura muy ligera y suave... TYVEK® ha sido inventado y es fabricado exclusivamente por DuPont. TYVEK® es permeable al aire y al vapor de agua y, además, repele aerosoles líquidos y líquidos acuosos. Actúa como una barrera excelente contra partículas y fibras. Suelta poca pelusa y está tratado antiestáticamente.",
+  "price": "2000",
+  "category": "EPP indumentaria",
+  "color": "Amarillo",
+  "discount": "10",
+  "image": [
+   "img-tyvek.jpg"
+  ]
+ },
+ {
+  "id": "8",
+  "name": "Detector WatchGas",
+  "description": "El detector monogas PDM es el monitor de uso diario perfecto para entornos peligrosos  gracias a su alta fiabilidad y facilidad de uso. PDM ofrece la forma más rentable de garantizar la seguridad. Funciona hasta dos años sin necesidad de mantenimiento,  sencillamente encienda el dispositivo y este funcionará ininterrumpidamente: no será necesario cambiar baterías o sustituir los sensores o baterías. Esto supone una gran fiabilidad sin periodos de inactividad.",
+  "price": "1500",
+  "category": "Detectores de gases",
+  "color": "Naranja",
+  "discount": "10",
+  "image": [
+   "img-detector-watchgas.jpg"
+  ]
+ },
+ {
+  "name": "",
+  "description": "",
+  "price": "",
+  "category": "Protección respiratoria",
+  "color": "",
+  "discount": "",
+  "image": [
+   "default-image.jpeg"
+  ],
+  "id": 9
+ }
+]

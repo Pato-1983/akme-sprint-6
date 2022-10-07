@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main>
+        
+        <h3 class="register-title">REGISTRO</h3>        
+    
+        <form class="register-form" action="/users/register" method="POST" enctype="multipart/form-data">
+    
+            <div class="form-div">
+                <% if (locals.errors) { %>
+                    <% for (let oneError in errors) { %>
+                <% } %>
+            <%}%>
+                <label for="firstName" class="form-label">Nombre</label>
+                <input type="text" name="firstName" id="firstName" value= <%= locals.oldData ? oldData.firstName : null %>> 
+                <% if (locals.errors && errors.firstName) { %>
+                    <p class = "errorMessage"> <%= errors.firstName.msg %> </p>
+                <% } %>
+            </div>
+
+            <div class="form-div">
+                <label for="lastName" class="form-label">Apellido</label>
+                <input type="text" name="lastName" id="lastName" value= <%= locals.oldData ? oldData.lastName : null %>>
+                <% if (locals.errors && errors.lastName) { %>
+                    <p class = "errorMessage"> <%= errors.lastName.msg %> </p>
+                <% } %>
+            </div>
+    
+            <div class="form-div">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" value= <%= locals.oldData ? oldData.email : null %>>
+                <% if (locals.errors && errors.email) { %>
+                    <p class = "errorMessage"> <%= errors.email.msg %> </p>
+                <% } %>
+            </div>
+    
+            <div class="form-div">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" id="password" value= <%= locals.oldData ? oldData.password : null %>>
+                <% if (locals.errors && errors.password) { %>
+                    <p class = "errorMessage"> <%= errors.password.msg %> </p>
+                <% } %>
+            </div>
+    
+            <div class="form-div">
+                <label for="celular" class="form-label">Celular</label>
+                <input type="text" name="celular" id="celular" value= <%= locals.oldData ? oldData.celular : null %>>
+                <% if (locals.errors && errors.celular) { %>
+                    <p class = "errorMessage"> <%= errors.celular.msg %> </p>
+                <% } %>
+            </div>
+
+            <div class="form-div">
+                <label>Seleccionar imagen</label>
+                <input type="file" name="image" accept="jpg, png">
+                <% if (locals.errors && errors.image) { %>
+                    <p class = "errorMessage"> <%= errors.image.msg %> </p>
+                <% } %>
+            </div>
+    
+            <div class="form-buttons">
+                <button type="submit" class="submit-button">CREAR CUENTA</button>
+            </div>
+    
+        </form>
+    
+        <h3>Ya posee una cuenta? <a href="./login"> INICIAR SESION</a></h3>
+    </main>
+
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %> 
+    
+</body>
+</html>

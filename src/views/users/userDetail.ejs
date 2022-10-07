@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Head -->
+<%- include('../partials/head.ejs') %> 
+
+<body>
+
+    <!-- Header -->
+    <%- include('../partials/header.ejs') %> 
+
+    <main class="productDetail-main">
+       | 
+        <section class="product-detail-info">
+            <div class="product-detail-image">
+                <figure>
+                    <img src="/images/<%= user.image %>" width=250px alt="<%= user.firstName%> <%= user.lastName %>">
+                </figure>
+            </div>
+
+            <div class="product-detail-detail">
+                <p class="price">Nombre: <%= user.firstName %> <%= user.lastName %></p>
+                <p class="price">Email: <%= user.email %></p>
+                <p class="price">Celular: <%= user.celular %></p>
+                <p class="price">Password: <%= user.password %></p> 
+            </div>     
+        </section>
+
+        <div class="form-buttons">
+                <a href="/users/edit/<%= user.id %>"><button type="submit" class="submit-button">Editar</button></a>
+                <form action="/products/delete/<%= user.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="submit-button">Eliminar</button>
+                </form>
+        </div>   
+        
+    </main>   
+    
+    <!-- Footer -->
+    <%- include('../partials/footer.ejs') %> 
+    
+</body>
+</html>

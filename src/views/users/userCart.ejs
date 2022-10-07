@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/header') %>
+
+    <div class="item_container">
+      <div class="titleCart">
+        <h1>Tu carrito</h1>
+      </div>
+            
+      <div class="productCart">
+        <div class="img_product">
+          <img src="\images\img-mascara-fullface.jpg" alt="" />
+        </div>
+        <div class="product_infoCart">
+          <h2>Mascara de proteccion FULLFACE</h2>
+          <div class="price">
+            <p>$500</p>
+          </div>
+          
+          <div class="product_units">
+            <select class="select" id="">
+              <option value="value1">1 unit</option>
+              <option value="value2" selected>2 unit</option>
+              <option value="value3">3 unit</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn_delete">
+          <button class="delete"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="productCart">
+        <div class="img_product">
+          <img src="\images\img-tyvek.jpg" alt="" />
+        </div>
+        <div class="product_infoCart">
+          <h2>Mameluco TYVEK®</h2>
+          <div class="price">
+            <p>$700</p>
+          </div>
+          
+          <div class="product_units">
+            <select class="select" id="">
+              <option value="value1">1 unit</option>
+              <option value="value2" selected>2 unit</option>
+              <option value="value3">3 unit</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn_delete">
+          <button class="delete"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="productCart">
+        <div class="img_product">
+          <img src="\images\img-auditivo.jpg" alt="" />
+        </div>
+        <div class="product_infoCart">
+          <h2>Protectores auditivos Akme</h2>
+          <div class="price">
+            <p>$550</p>
+          </div>
+          
+          <div class="product_units">
+            <select class="select" id="">
+              <option value="value1">1 unit</option>
+              <option value="value2" selected>2 unit</option>
+              <option value="value3">3 unit</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn_delete">
+          <button class="delete"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="subtotal">
+        <div class="envio">
+          <select class="send" id="">
+            <option value="value1" selected hidden>Envios a:</option>
+            <option value="value2">envio a CABA</option>
+            <option value="value3">envio a AMBA</option>
+            <option value="value4">envio a Envio Sucursal</option>
+          </select>
+          <!-- <label for="send">envio <i class="fas fa-truck-moving"></i></label>
+          <input class="check" type="checkbox" id="send" /> -->
+        </div>
+        <p>Subtotal (sin envio): $1750</p>
+      </div>
+      <!-- <div class="send_options" id="send_options">
+        <div class="op1 op">
+          <input type="checkbox" id="caba" />
+          <label for="caba">Envio a caba</label>
+        </div>
+        <div class="op2 op">
+          <input type="checkbox" id="interior" />
+          <label for="interior">Envio a interior</label>
+        </div>
+        <div class="op3 op">
+          <input type="checkbox" id="sucursal" />
+          <label for="sucursal">Envio a sucursal</label>
+        </div>
+      </div> -->
+
+      <form class="form_buy" action="">
+        <button>Comprar</button>
+      </form>
+    </div>
+
+    <%- include('../partials/footer') %>
+  </body>
+
+</html>
