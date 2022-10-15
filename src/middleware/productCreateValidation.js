@@ -34,9 +34,9 @@ const validations =[
         return true;
     }),
     
-    body('category').notEmpty() .withMessage('Ingresa una categoría'),
+    body('categoryId').notEmpty() .withMessage('Ingresa una categoría'),
     
-    body('color')
+    body('colorId')
         .notEmpty() .withMessage('Ingresa un color'),
 
     body('discount')

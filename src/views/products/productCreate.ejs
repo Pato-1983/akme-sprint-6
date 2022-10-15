@@ -51,21 +51,31 @@
                 <% } %>
             </div>
             
-            <div class="form-div"></div>
+            <div class="form-div">
                 <label>Seleccione categoria</label>
-                <select name="category" id="category">
-                    <option value="Protección respiratoria">Protección respiratoria</option>
-                    <option value="Detectores de gases">Detectores de gases</option>
-                    <option value="EPP indumentaria">EPP indumentaria</option>
+
+                <select name="categoryId" id="categoryId">
+                    <% for (let i = 0; i < categories.length; i++) {%> 
+                        <option value="<%=categories[i].id%>">
+                            <%=categories[i].name%>
+                        </option>
+                        <% }; %> 
                 </select>
+
                 <% if (locals.errors && errors.category) { %>
                     <p class = "errorMessage"> <%= errors.category.msg %> </p>
                 <% } %>
             </div>
 
             <div class="form-div">
-                <label for="color" class="form-label">Color</label>
-                <input type="text" name="color" id="color">
+                <label>Seleccione color</label>
+            <select name="colorId" id="colorId">
+                <% for (let i = 0; i < colors.length; i++) {%> 
+                    <option value="<%=colors[i].id%>">
+                        <%=colors[i].name%>
+                    </option>
+                    <% }; %> 
+            </select>
                 <% if (locals.errors && errors.color) { %>
                     <p class = "errorMessage"> <%= errors.color.msg %> </p>
                 <% } %>

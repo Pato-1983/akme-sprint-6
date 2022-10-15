@@ -23,49 +23,80 @@ const controller = {
 
     products: async (req, res) => {
 
-		const  include = ['Images']
-
         try {
-            const productos = await db.Products.findAll ({include});
-			console.log(productos)
+            
+           // const imagenes = await db.Images.findAll()
+            const productos = await db.Products.findAll ({include: [db.Images]});
+
+            productos.forEach(producto => {
+
+            console.log(producto.Images[0].name)
+
+
+            })
+
             return res.render('products/products', {productos, toThousand})
         } 
 		catch (error) {
             res.json(error.message)
         }
+
+
 		
     },
 
-    detail: (req,res) => { 
-        const id = +req.params.id;
-        const product = productModel.find(id);    
-        res.render('products/productDetail', {product,toThousand})
+    detail: async (req,res) => {
+        try{
+
+            const id = +req.params.id;
+            const product = await db.Products.findByPk(id, {include: [db.Images]});
+
+            res.render('products/productDetail', {product,toThousand})
+        
+        }catch (error) {
+            res.json(error.message)
+        }
     },
 
-    create: (req,res) => res.render('products/productCreate'),
+    create : async (req,res) => {
+        try {
+            const categories = await db.Category.findAll();
+            const colors = await db.Color.findAll();
+            res.render('products/productCreate', {categories, colors})
+        } catch (error) {
+            res.json({error: error.message});
+        }
+    },
 
     store: async (req, res) => {
 
 		let files = req.files
 
 		const results = validationResult(req)
+
 		
 		if (results.errors.length > 0) {
-			//console.log (results.errors)
-			return res.render('products/productCreate', {
-				errors:results.mapped(),
-				oldData:req.body
-			})
-		}
+        
+            try{
+                const categories = await db.Category.findAll()
+                const colors = await db.Color.findAll()
+
+			    return res.render('products/productCreate', {
+				    errors:results.mapped(),
+				    oldData:req.body, categories, colors})
+		
+            } catch (error) {
+            res.status(500).json({ error: error.message });
+        }}
 	
-		let {name, description, price, category, color} = req.body
+		let {name, description, price, categoryId, colorId} = req.body
 
 		let objAux={
             name: name,
             description: description,
             price: price,
-            category_Id: category,
-			color_Id: color
+            category_id: categoryId,
+			color_id: colorId
         }
 
 		try {
@@ -74,13 +105,17 @@ const controller = {
 
             let newProduct = await db.Products.create(objAux);
 
-			console.log (newProduct)
 
-			files.forEach(image => {
-                productImages.push({name: image.filename, productId: newProduct.id})
-            })
-            
-            let images = await db.Images.bulkCreate(productImages);
+
+            for(let i = 0 ; i<req.files.length;i++) {
+                productImages.push({
+                    name: req.files[i].filename,
+                    productId: newProduct.id
+                })
+            }
+                if (productImages.length > 0) {
+                    await db.Images.bulkCreate(productImages)
+                }
 
             
         } catch (error) {
@@ -90,44 +125,87 @@ const controller = {
 		return res.redirect('/products/create')
     },
 
-    edit: (req,res) => { 
-        const id = +req.params.id;
-        const product = productModel.find(id);    
-        res.render('products/productEdit',{product});
+    edit: async (req,res) => {
+        try {
+
+            const id = +req.params.id;
+            const product = await db.Products.findByPk(id);    
+            
+            let categories = await db.Category.findAll();
+            let colors = await db.Color.findAll();
+
+            res.render('products/productEdit',{product, categories, colors});
+        
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     },
 
-    delete: function(req,res){
-        let id = Number(req.params.id);
-        products.delete(id);
-        res.redirect("/");
+
+    delete: async (req,res) =>{
+        try {
+
+            let id = req.params.id;
+            await db.Products.destroy ({where: {id:id}});
+            await db.Images.destroy ({where: {productId:id}});
+            res.redirect("/");
+        
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     },
 
-	update: (req, res) => {
-		let id = Number(req.params.id);
-		let productToEdit = productModel.find(id);
-		let images = [];
-		let files = req.files
-		
-		files.forEach(image => {
-			
-			images.push(image.filename)
-		});
+	update: async (req, res) => {
 
-		productToEdit = {
-			id: productToEdit.id,
-			...req.body,
-			image: files.length >= 1  ? images : productToEdit.image
-		}
+        try {
+        
+            let id = req.params.id
+            let {name, description, price, categoryId, colorId} = req.body
+            let newImages = []
 
-		productModel.update(productToEdit)
-		res.redirect("/");
-	},
-	
-    
-    filter: (req,res) => {
-        let filtro = req.query;
-        const products = productModel.readFile();
-        res.render('products/products', {products,toThousand,filtro})
+            let objAux = {
+                name: name,
+                description: description,
+                price: price,
+                category_id: categoryId,
+                color_id: colorId
+            }
+
+        
+            await db.Products.update(objAux, {where:{id:id}})
+
+            //
+            if (req.files.length > 0) {
+                for(let i = 0 ; i<req.files.length;i++) {
+                    newImages.push({
+                        name: req.files[i].filename,
+                        productId: id
+                    })
+            }
+                
+            
+                const oldImages = await db.Images.findAll({where: {productId: id}})
+                oldImages.forEach( image => {
+                    fs.unlinkSync(path.resolve(__dirname, '../../public/images/'+image.name))
+                })
+                
+                await db.Images.destroy({where: {productId: id}})
+                await db.Images.bulkCreate(newImages)
+            } 
+
+
+
+
+            console.log (req.files)
+            console.log (req.file)
+            
+            //
+
+            res.redirect("/")
+
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     },
 
 }

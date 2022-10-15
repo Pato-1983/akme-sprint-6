@@ -6,30 +6,68 @@ const jsonDB = require('../model/jsonDatabase');
 const usersModel = jsonDB ('users')
 const users = jsonDB('users') 
 
-const { validationResult } = require('express-validator')
+const { validationResult } = require('express-validator');
+const db = require('../database/models');
 
 const controller = {
 
-    register: (req,res) => res.render('users/register'),
+    register: async (req,res) => {
 
-	users: (req,res) => {
-        const users = usersModel.readFile();
-        res.render('users/usersList', {users})
+		try {
+			let roles = await db.Roles.findAll();
+
+			res.render('users/register', {roles})
+		
+		} catch (error) {
+            res.status(500).json({ error: error.message });
+        }	
 	},
 
-	detail: (req,res) => { 
-        const id = +req.params.id;
-        let user = usersModel.find(id);    
-        res.render('users/userDetail', {user})
-    },
-	
-	edit: (req,res) => { 
-        const id = +req.params.id;
-        const users = usersModel.find(id);    
-        res.render('users/userEdit', {users})
-    },
+	users: async (req,res) => {
 
-    store: (req, res) => {
+		try {
+
+        const users = await db.Users.findAll({include: [db.Roles]});
+        
+		res.render('users/usersList', {users})
+
+		} catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+	},
+
+	detail: async (req,res) => {
+		
+		try {
+
+        	const id = +req.params.id;
+        	let user = await db.Users.findByPk(id,{include: [db.Roles]})
+        	res.render('users/userDetail', {user})
+    	
+		} catch (error) {
+
+			res.status(500).json({ error: error.message });
+	}
+	
+	},
+	
+	edit: async (req,res) => { 
+
+		try {
+        const id = +req.params.id;
+        const users = await db.Users.findByPk(id)
+		const roles = await db.Roles.findAll()
+
+        res.render('users/userEdit', {users, roles})
+    
+		} catch (error) {
+
+		res.status(500).json({ error: error.message });
+	}
+	
+	},
+
+    store: async (req, res) => {
 		
 		const results = validationResult(req)
 		
@@ -38,12 +76,17 @@ const controller = {
 				errors:results.mapped(),
 				oldData:req.body
 			})
+
 		} else {
 
-            let userToFind = usersModel.findByField("email", req.body.email)
-			console.log(userToFind)
+			try {
+
+            let userToFind = await db.Users.findOne ({where:{email : req.body.email}})
 
             if(userToFind){
+				if (req.file) {
+					fs.unlinkSync(path.resolve(__dirname, '../../public/images/'+req.file.filename))
+				}
                 return res.render('users/register', {
                     errors:{
                         email:{
@@ -51,53 +94,84 @@ const controller = {
 							
                         }
                     },
+				
 				oldData:req.body	
                 })
-            }}
+				
+            }
 
-		let newUser = {
-			...req.body,
-			password: bcrypt.hashSync(req.body.password, 10),
-			image: req.file !== undefined ? req.file.filename : "default-user-image.png"
-		}
+			let user = {
+				...req.body,
+				password: bcrypt.hashSync(req.body.password, 10),
+				roles_Id: 2,
+				celular: req.body.celular,
+				image: req.file !== undefined ? req.file.filename : "default-user-image.png"
+			}
 
-		usersModel.create(newUser)
+			console.log(user)
+
+			let newUser = await db.Users.create(user)
+
+		///
+//
+//			let userImage = {
+//				name: req.file.filename,
+//				usersId: newUser.id
+//			} 
+//			console.log(newUser)
+//
+//			await db.UsersImages.create(userImage)
+//
+		///
 		res.redirect('/users/login')
+//
+		} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
 
-	},
+}},
 
-	update: (req, res) => {
+	
+	update: async (req, res) => {
+
+		try {
+
 		let id = Number(req.params.id);
-		let userToEdit = usersModel.find(id);
-		let images = [];
-		let files = req.files
-		
-		files.forEach(image => {
-			
-			images.push(image.filename)
-		});
+		let userToEdit = await db.Users.findByPk(id);
 
 		userToEdit = {
 			id: userToEdit.id,
 			...req.body,
 			image: req.file !== undefined ? req.file.filename : "default-user-image.png"
-			//image: files.length >= 1  ? images : userToEdit.image
+			
 		}
 
-		usersModel.update(userToEdit)
+		await db.Users.update(userToEdit, {where:{id:id}})
 		res.redirect("/users/users");
+	
+		} catch (error) {
+
+			res.status(500).json({ error: error.message });
+		
+		}
+	
+	
 	},
     
     login: (req,res) => res.render('users/login'),
 
-	loginProcess: (req,res) => {
+	loginProcess: async (req,res) => {
 
-		let userToLogin = usersModel.findByField ("email", req.body.email)
+		try {
+
+		let userToLogin = await db.Users.findOne ({where: {"email": req.body.email}})
 		if (userToLogin) {
 			let passwordOk = bcrypt.compareSync (req.body.password, userToLogin.password)
 			if (passwordOk) {
 				delete userToLogin.password
 				req.session.userLogged = userToLogin
+
+				console.log('**************'+userToLogin)
 
 				if(req.body.rememberMe) {
 					res.cookie ('email', req.body.email, {maxAge: 1000 * 60 * 60 * 24})
@@ -113,10 +187,16 @@ const controller = {
 				}
 			}
 		})
+
+		} catch (error) {
+
+			res.status(500).json({ error: error.message });
+		
+		}
+
 	},
 
 	profile: (req,res) => {
-		console.log (req.cookies.email)
 		res.render('users/userProfile', {
 			user: req.session.userLogged})
 	},
@@ -124,7 +204,6 @@ const controller = {
 	logout: (req,res) => {
 		res.clearCookie('email')
 		req.session.destroy()
-		console.log(req.session)
 		return res.redirect ('/')
 
 	},

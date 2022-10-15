@@ -28,6 +28,11 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="text" name="email" id="email" value= "<%= users.email %>" required>
             </div>
+
+            <div class="form-div">
+                <label for="celular" class="form-label">Celular</label>
+                <input type="text" name="celular" id="celular" value= "<%= users.celular %>" required>
+            </div>
             
             <div class="form-div">
                 <label for="password" class="form-label">Contraseña</label>
@@ -35,8 +40,16 @@
             </div>
 
             <div class="form-div">
-                <label for="celular" class="form-label">Celular</label>
-                <input type="text" name="celular" id="celular" value= "<%= users.celular %>" required>
+                <div>
+                <label>Rol</label>
+            <select name="roles_Id" id="roles_Id">
+                <% for (let i = 0; i < roles.length; i++) {%> 
+                    <option value="<%=roles[i].id%>">
+                        <%=roles[i].name%>
+                    </option>
+                    <% }; %> 
+            </select>
+                </div>
             </div>
 
             <div class="form-div">

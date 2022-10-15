@@ -38,11 +38,11 @@
                 <div class="listado">
                     <p class="titulo">OFERTAS</p>
                 </div>
-                <% ofertas.forEach(products => { %>                    
+                <% products.forEach(products => { %>                    
                     <article class="ofertas">
                         <a href="/products/detail/<%= products.id %> ">
                             <figure>
-                                <img src="/images/<%= products.image[0] %>" class="product_img"
+                                <img src="/images/<%= products.Images[0].name %>" class="product_img"
                                     alt="<%= products.name %>">
                             </figure>
                             <div class="main-article">

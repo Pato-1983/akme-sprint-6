@@ -38,20 +38,26 @@
                 <input type="file" name="image" accept="jpg, png">
             </div>
 
-            
-            <div class="form-div"></div>
+            <div class="form-div">
                 <label>Seleccione categoria</label>
-                <select name="category" id="category">
-                    <option value="Protectores respiratorios" <%= product.category == "Proteccion respiratoria" ? "selected" : "" %>> Proteccion respiratoria </option>
-                    <option value="Detectores de gases" <%= product.category == "Detectores de gases" ? "selected" : "" %>> Detectores de gases </option>
-                    <option value="EPP indumentaria" <%= product.category == "EPP indumentaria" ? "selected" : "" %>>EPP indumentaria</option>
-                    <option value="Protectores auditivos" <%= product.category == "Protectores auditivos" ? "selected" : "" %>>Protectores auditivos</option>
+                <select name="categoryId" id="categoryId">                  
+                    <% for (let i = 0; i < categories.length; i++) {%> 
+                        <option value="<%=categories[i].id%>">
+                            <%=categories[i].name%>
+                        </option>
+                        <% }; %> 
                 </select>
             </div>
 
             <div class="form-div">
-                <label for="color" class="form-label">Color</label>
-                <input type="text" name="color" id="color" value= "<%= product.color %>" required>
+                <label>Seleccione color</label>
+            <select name="colorId" id="colorId">
+                <% for (let i = 0; i < colors.length; i++) {%> 
+                    <option value="<%=colors[i].id%>">
+                        <%=colors[i].name%>
+                    </option>
+                    <% }; %> 
+            </select>
             </div>
 
             <div class="form-div">

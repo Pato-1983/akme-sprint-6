@@ -1,6 +1,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const db = require('../database/models')
 
 
 const productsJSON = fs.readFileSync(path.resolve(__dirname, '../database/products.json'), 'utf8');
@@ -12,11 +13,17 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 controller = {
 
-    index : (req,res) => {
-        const products = productModel.readFile();
-        const ofertas = products.filter(product => product.discount != 0);  
+    index : async (req,res) => {
+        try {
+
+        const products = await db.Products.findAll({include: [db.Images]});  
           
-        res.render('main/index',{ofertas,toThousand});
+        res.render('main/index',{products,toThousand});
+    
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+    }
+    
     },
 
     contact: (req,res) => res.render('main/contact'),

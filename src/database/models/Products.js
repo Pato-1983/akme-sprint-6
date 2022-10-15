@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
           as: 'colors', 
           foreignKey: 'color_id' 
       }),
-      Products.hasMany(models.Images)
+      this.hasMany(models.Images)
     }
   }
   Products.init({

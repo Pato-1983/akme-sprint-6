@@ -25,7 +25,7 @@
             <a href="/products/products">Productos</a>
             <a href="/contact">Contacto</a>
             <a href="/about">Nosotros</a>
-            <% if (locals.isLogged && locals.userLogged.admin == true) {%> 
+            <% if (locals.isLogged && locals.userLogged.roles_id == 1) {%> 
             <a href="/users/adminMenu">Admin</a>
             <% } %>             
         </nav>

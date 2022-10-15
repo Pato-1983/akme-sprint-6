@@ -1,12 +1,17 @@
 const jsonDB = require('../model/jsonDatabase');
 const usersModel = jsonDB ('users')
+let db = require("../dataBase/models")
 
-function userLoggedMiddleware (req,res,next) {
+async function userLoggedMiddleware (req,res,next) {
 
-    res.locals.isLogged = false;
+    res.locals.isLogged = false
 
-    let emailInCookie = req.cookies.email
-    let UserFromCookie = usersModel.findByField ("email", emailInCookie)
+    const emailInCookie = req.cookies.email
+    const UserFromCookie = await db.Users.findOne ({
+        where: {
+            email: emailInCookie || " "
+        }
+    })
 
     if (UserFromCookie) {
         req.session.userLogged = UserFromCookie

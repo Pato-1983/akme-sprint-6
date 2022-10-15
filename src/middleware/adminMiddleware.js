@@ -1,9 +1,8 @@
 function adminMiddleware(req, res, next) {
-    if(res.locals.userLogged && res.locals.userLogged.admin == true) {
+    if(res.locals.userLogged && res.locals.userLogged.roles_id == 1) {
         next();
     }
 
-    res.redirect("/");
 }
 
 module.exports = adminMiddleware;
